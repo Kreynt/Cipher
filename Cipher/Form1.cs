@@ -27,7 +27,45 @@ namespace Cipher
                 s = s.Insert(j + 1, ch.ToString());
             }
 
+            int i = 0;
+            foreach (char c in s)
+            {
+                int a = (int)c;
+                if (i % 2 == 0)
+                {
+                    a += (i + 10);
+                }
+                else
+                {
+                    a -= (i + 10);
+                }
+                while (a < 0) a += 65536;
+                while (a > 65535) a -= 65536;
+                s = s.Remove(i, 1);
+                s = s.Insert(i, ((char)a).ToString());
+                i++;
+            }
+
             textBox2.Text = s;
+
+            i = 0;
+            foreach (char c in s)
+            {
+                int a = (int)c;
+                if (i % 2 == 0)
+                {
+                    a -= (i + 10);
+                }
+                else
+                {
+                    a += (i + 10);
+                }
+                while (a < 0) a += 65536;
+                while (a > 65535) a -= 65536;
+                s = s.Remove(i, 1);
+                s = s.Insert(i, ((char)a).ToString());
+                i++;
+            }
 
             for (int j = 0; j < s.Length - 2; j += 2)
             {
