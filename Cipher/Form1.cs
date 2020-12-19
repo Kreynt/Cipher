@@ -59,7 +59,7 @@ namespace Cipher//Названия переменных, объектов и м�
             for (int j = 0; j < 100; j++)
                 for (int f = 0; f < 3; f++)
                     k[j, f] = x.Next(0, 10);
-            k[0, 0] = x.Next(101, 900);
+            k[0, 0] = x.Next(101, 1000);
             k[0, 1] = x.Next(11, 100);
 
             int z = x.Next(91, 100);
@@ -138,8 +138,68 @@ namespace Cipher//Названия переменных, объектов и м�
                 if (j != 9) z -= y;
             }
             k[0, 2] = z;
+            string sm = "";
+            int m = 0;
+            while (s.Length - m > 3)
+            {
+                string b = (k[0, 0] + Convert.ToInt32(s.Substring(m, 3))).ToString();
+                if (b.Length < 4) b = x.Next(2, 10).ToString() + b;
+                sm += (x.Next(100, 1000).ToString() + b);
+                m += 3;
+            }
+            if (m < s.Length) sm += s.Substring(m);
+            s = sm;
+
 
             textBox2.Text = s;
+            textBox4.Text = "";
+            for (int j = 0; j < 3; j++)
+                for (int f = 0; f < 100; f++)
+                    textBox4.Text += k[f, j].ToString();
+
+            int n = 0;
+            for (int j = 0; j < 3; j++)
+                for (int f = 0; f < 100; f++)
+                {
+                    if (f == 0)
+                    {
+                        if (j == 0)
+                        {
+                            k[0, 0] = Convert.ToInt32(textBox4.Text.Substring(n, 3));
+                            n += 3;
+                        }
+                        if (j == 1)
+                        {
+                            k[0, 1] = Convert.ToInt32(textBox4.Text.Substring(n, 2));
+                            n += 2;
+                        }
+                        if (j == 2)
+                        {
+                            k[0, 2] = Convert.ToInt32(textBox4.Text.Substring(n, 2));
+                            n += 2;
+                        }
+                    }
+                    else
+                    {
+                        k[f, j] = Convert.ToInt32(textBox4.Text.Substring(n, 1));
+                        n += 1;
+                    }
+                }
+
+            sm = "";
+            m = 0;
+            while (s.Length - m > 7)
+            {
+                string b = s.Substring(m, 7);
+                b = b.Remove(0, 3);
+                if (b[0] != '1') b = b.Remove(0, 1);
+                b = (Convert.ToInt32(b) - k[0, 0]).ToString();
+                while (b.Length < 3) b = '0' + b;
+                sm += b;
+                m += 7;
+            }
+            if (m < s.Length) sm += s.Substring(m);
+            s = sm;
 
             z = k[0, 2]; ;
             for (int j = 0; j < 10; j++)
