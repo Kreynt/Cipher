@@ -26,6 +26,7 @@ namespace Cipher//Названия переменных, объектов и м�
                 try
                 {
                     string s = textBox1.Text;
+                    if (CB_spec_char.Checked) s += "\r\n/_=+/'" + textBox5.Text;
                     for (int j = 0; j < s.Length - 2; j += 2)
                     {
                         char ch = s[j];
@@ -164,7 +165,7 @@ namespace Cipher//Названия переменных, объектов и м�
                 }
                 catch
                 {
-                    MessageBox.Show("Не удалось расшифровать текст", "Неудача", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                    MessageBox.Show("Не удалось зашифровать текст", "Неудача", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
                 }
             }
         }
@@ -317,6 +318,11 @@ namespace Cipher//Названия переменных, объектов и м�
                         char ch = s[j];
                         s = s.Remove(j, 1);
                         s = s.Insert(j + 1, ch.ToString());
+                    }
+                    if (s.LastIndexOf("/_=+/'") != -1) 
+                    {
+                        textBox10.Text = s.Substring(s.LastIndexOf("/_=+/'") + 6);
+                        s = s.Remove(s.LastIndexOf("/_=+/'"));
                     }
                     textBox3.Text = s;
                 }
