@@ -45,10 +45,31 @@ namespace Cipher
                 s = s.Insert(i, ((char)a).ToString());
                 i++;
             }
+
             s = new string(s.ToCharArray().Reverse().ToArray());
+
+            string s1 = "";
+            foreach (char c in s)
+            {
+                string s2 = ((int)c).ToString();
+                while (s2.Length < 5) s2 = '0' + s2;
+                s1 += s2;
+            }
+            s = s1;
+
             textBox2.Text = s;
+
+            s1 = "";
+            for (int j = 0; j < s.Length - 4; j += 5)
+            {
+                int a = Convert.ToInt32(s[j].ToString() + s[j + 1].ToString() + s[j + 2].ToString() + s[j + 3].ToString() + s[j + 4].ToString());
+                s1 += ((char)a).ToString();
+            }
+            s = s1;
+
             s = new string(s.ToCharArray().Reverse().ToArray());
             i = 0;
+
             foreach (char c in s)
             {
                 int a = (int)c;
