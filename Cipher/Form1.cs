@@ -52,6 +52,13 @@ namespace Cipher//Названия переменных, объектов и м�
                         i++;
                     }
                     s = new string(s.ToCharArray().Reverse().ToArray());
+                    string h = s.GetHashCode().ToString();
+                    textBox6.Text = "";
+                    foreach (char c in h)
+                    {
+                        string s2 = ((int)c).ToString();
+                        textBox6.Text += s2;
+                    }
                     string s1 = "";
                     foreach (char c in s)
                     {
@@ -294,6 +301,23 @@ namespace Cipher//Названия переменных, объектов и м�
                         s1 += ((char)a).ToString();
                     }
                     s = s1;
+                    string h = s.GetHashCode().ToString();
+                    string sh = "";
+                    foreach (char c in h)
+                    {
+                        string s2 = ((int)c).ToString();
+                        sh += s2;
+                    }
+                    if (sh == textBox9.Text)
+                    {
+                        label12.Text = "Проверка пройдена. Достоверность\r\nтекста и подписи подтверждена.";
+                        label12.ForeColor = Color.FromArgb(0, 190, 0);
+                    }
+                    else
+                    {
+                        label12.Text = "Проверка провалена!!!\r\nНас обманули! Достоверность нарушена!!!";
+                        label12.ForeColor = Color.Red;
+                    }
                     s = new string(s.ToCharArray().Reverse().ToArray());
                     int i = 0;
                     foreach (char c in s)
@@ -322,7 +346,7 @@ namespace Cipher//Названия переменных, объектов и м�
                     if (s.LastIndexOf("/_=+/'") != -1) 
                     {
                         textBox10.Text = s.Substring(s.LastIndexOf("/_=+/'") + 6);
-                        s = s.Remove(s.LastIndexOf("/_=+/'"));
+                        s = s.Remove(s.LastIndexOf("/_=+/'") - 2);
                     }
                     textBox3.Text = s;
                 }
@@ -400,13 +424,13 @@ namespace Cipher//Названия переменных, объектов и м�
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                Filter = "Все файлы (*.*)|*.*"
+                Filter = "Текстовые файлы (*.txt)|*.txt"
             };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 StreamWriter sw = new StreamWriter(saveFileDialog.FileName, false, Encoding.Default);
-                sw.WriteLine(textBox3.Text);
+                sw.Write(textBox3.Text);
                 sw.Close();
             }
         }

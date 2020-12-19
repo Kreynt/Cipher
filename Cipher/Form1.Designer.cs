@@ -93,7 +93,7 @@
             // 
             this.textBox3.BackColor = System.Drawing.Color.White;
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(39, 659);
+            this.textBox3.Location = new System.Drawing.Point(39, 636);
             this.textBox3.MaxLength = 999999999;
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
@@ -335,7 +335,8 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label12.Location = new System.Drawing.Point(35, 907);
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(35, 884);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(0, 24);
             this.label12.TabIndex = 86;
@@ -344,7 +345,7 @@
             // 
             this.textBox10.BackColor = System.Drawing.Color.White;
             this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox10.Location = new System.Drawing.Point(39, 870);
+            this.textBox10.Location = new System.Drawing.Point(39, 847);
             this.textBox10.MaxLength = 999999999;
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
@@ -360,7 +361,7 @@
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button6.ForeColor = System.Drawing.Color.Black;
-            this.button6.Location = new System.Drawing.Point(336, 818);
+            this.button6.Location = new System.Drawing.Point(336, 795);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(189, 29);
             this.button6.TabIndex = 84;
@@ -373,7 +374,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(35, 843);
+            this.label11.Location = new System.Drawing.Point(35, 820);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(215, 24);
             this.label11.TabIndex = 85;
@@ -384,7 +385,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(35, 632);
+            this.label10.Location = new System.Drawing.Point(35, 609);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(219, 24);
             this.label10.TabIndex = 84;
@@ -398,7 +399,7 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.Location = new System.Drawing.Point(39, 550);
+            this.button5.Location = new System.Drawing.Point(39, 527);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(486, 65);
             this.button5.TabIndex = 84;
@@ -414,7 +415,7 @@
             this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
             this.textBox9.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox9.Size = new System.Drawing.Size(486, 79);
+            this.textBox9.Size = new System.Drawing.Size(486, 58);
             this.textBox9.TabIndex = 84;
             // 
             // label9
