@@ -208,6 +208,7 @@
             this.button1.TabIndex = 79;
             this.button1.Text = "Сохранить в файл";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label5
             // 
@@ -365,6 +366,7 @@
             this.button6.TabIndex = 84;
             this.button6.Text = "Сохранить в файл";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label11
             // 
