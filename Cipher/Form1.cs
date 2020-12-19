@@ -11,14 +11,14 @@ using System.Numerics;
 
 namespace Cipher//Названия переменных, объектов и методов сделаны такими специально, обычно я их нормально называю :-) 
 {
-    public partial class Form1 : Form
+    internal partial class Form1 : Form
     {
-        public Form1()
+        internal Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void B_Gen_Click(object sender, EventArgs e)
         {
             string s = textBox1.Text;
             for (int j = 0; j < s.Length - 2; j += 2)
@@ -156,7 +156,12 @@ namespace Cipher//Названия переменных, объектов и м�
             for (int j = 0; j < 3; j++)
                 for (int f = 0; f < 100; f++)
                     textBox4.Text += k[f, j].ToString();
+        }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            int[,] k = new int[100, 3];
             int n = 0;
             for (int j = 0; j < 3; j++)
                 for (int f = 0; f < 100; f++)
@@ -165,29 +170,29 @@ namespace Cipher//Названия переменных, объектов и м�
                     {
                         if (j == 0)
                         {
-                            k[0, 0] = Convert.ToInt32(textBox4.Text.Substring(n, 3));
+                            k[0, 0] = Convert.ToInt32(textBox8.Text.Substring(n, 3));
                             n += 3;
                         }
                         if (j == 1)
                         {
-                            k[0, 1] = Convert.ToInt32(textBox4.Text.Substring(n, 2));
+                            k[0, 1] = Convert.ToInt32(textBox8.Text.Substring(n, 2));
                             n += 2;
                         }
                         if (j == 2)
                         {
-                            k[0, 2] = Convert.ToInt32(textBox4.Text.Substring(n, 2));
+                            k[0, 2] = Convert.ToInt32(textBox8.Text.Substring(n, 2));
                             n += 2;
                         }
                     }
                     else
                     {
-                        k[f, j] = Convert.ToInt32(textBox4.Text.Substring(n, 1));
+                        k[f, j] = Convert.ToInt32(textBox8.Text.Substring(n, 1));
                         n += 1;
                     }
                 }
-
-            sm = "";
-            m = 0;
+            string s = textBox7.Text;
+            string sm = "";
+            int m = 0;
             while (s.Length - m > 7)
             {
                 string b = s.Substring(m, 7);
@@ -201,7 +206,7 @@ namespace Cipher//Названия переменных, объектов и м�
             if (m < s.Length) sm += s.Substring(m);
             s = sm;
 
-            z = k[0, 2]; ;
+            int z = k[0, 2]; ;
             for (int j = 0; j < 10; j++)
             {
                 int d = k[z, 0];
@@ -267,7 +272,7 @@ namespace Cipher//Названия переменных, объектов и м�
                 }
                 z += k[z, 2];
             }
-            s1 = "";
+            string s1 = "";
             for (int j = 0; j < s.Length - 4; j += 5)
             {
                 int a = Convert.ToInt32(s[j].ToString() + s[j + 1].ToString() + s[j + 2].ToString() + s[j + 3].ToString() + s[j + 4].ToString());
@@ -275,7 +280,7 @@ namespace Cipher//Названия переменных, объектов и м�
             }
             s = s1;
             s = new string(s.ToCharArray().Reverse().ToArray());
-            i = 0;
+            int i = 0;
             foreach (char c in s)
             {
                 int a = (int)c;
@@ -300,6 +305,16 @@ namespace Cipher//Названия переменных, объектов и м�
                 s = s.Insert(j + 1, ch.ToString());
             }
             textBox3.Text = s;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(textBox4.Text);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(textBox6.Text);
         }
     }
 }
