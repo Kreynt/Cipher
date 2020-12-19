@@ -65,7 +65,7 @@ namespace Cipher//Названия переменных, объектов и м�
             int z = x.Next(91, 100);
             for (int j = 0; j < 10; j++)
             {
-                int d = x.Next(1, 4);
+                int d = x.Next(1, 5);
                 k[z, 0] = d;
                 if (d == 1)
                 {
@@ -109,6 +109,29 @@ namespace Cipher//Названия переменных, объектов и м�
                     }
                     BigInteger b = BigInteger.Parse(s) * p;
                     s = sk + b.ToString();
+                }
+                if (d == 4)
+                {
+                    int p = x.Next(1, 10);
+                    k[z, 1] = p;
+                    int l = 0;
+                    while (p * 4 < s.Length - l)
+                    {
+                        string b1 = s.Substring(l, p);
+                        string b2 = s.Substring(l + p * 2, p);
+                        s = s.Remove(l, p);
+                        s = s.Insert(l, b2);
+                        s = s.Remove(l + p * 2, p);
+                        s = s.Insert(l + p * 2, b1);
+                        l += p;
+                        b1 = s.Substring(l, p);
+                        b2 = s.Substring(l + p * 2, p);
+                        s = s.Remove(l, p);
+                        s = s.Insert(l, b2);
+                        s = s.Remove(l + p * 2, p);
+                        s = s.Insert(l + p * 2, b1);
+                        l += 3 * p;
+                    }
                 }
                 int y = x.Next(1, 10);
                 k[z - y, 2] = y;
@@ -160,6 +183,27 @@ namespace Cipher//Названия переменных, объектов и м�
                     BigInteger b = BigInteger.Parse(s) / p;
                     s = sk + b.ToString();
 
+                }
+                if (d == 4)
+                {
+                    int l = 0;
+                    while (p * 4 < s.Length - l)
+                    {
+                        string b1 = s.Substring(l, p);
+                        string b2 = s.Substring(l + p * 2, p);
+                        s = s.Remove(l, p);
+                        s = s.Insert(l, b2);
+                        s = s.Remove(l + p * 2, p);
+                        s = s.Insert(l + p * 2, b1);
+                        l += p;
+                        b1 = s.Substring(l, p);
+                        b2 = s.Substring(l + p * 2, p);
+                        s = s.Remove(l, p);
+                        s = s.Insert(l, b2);
+                        s = s.Remove(l + p * 2, p);
+                        s = s.Insert(l + p * 2, b1);
+                        l += 3 * p;
+                    }
                 }
                 z += k[z, 2];
             }
