@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Numerics;
 
-namespace Cipher
+namespace Cipher//Названия переменных, объектов и методов сделаны такими специально, обычно я их нормально называю :-) 
 {
     public partial class Form1 : Form
     {
@@ -17,7 +18,7 @@ namespace Cipher
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)//Названия переменных, объектов и методов сделаны такими специально, обычно я их нормально называю :-) 
+        private void button1_Click(object sender, EventArgs e)
         {
             string s = textBox1.Text;
             for (int j = 0; j < s.Length - 2; j += 2)
@@ -26,7 +27,6 @@ namespace Cipher
                 s = s.Remove(j, 1);
                 s = s.Insert(j + 1, ch.ToString());
             }
-
             int i = 0;
             foreach (char c in s)
             {
@@ -45,9 +45,7 @@ namespace Cipher
                 s = s.Insert(i, ((char)a).ToString());
                 i++;
             }
-
             s = new string(s.ToCharArray().Reverse().ToArray());
-
             string s1 = "";
             foreach (char c in s)
             {
@@ -56,9 +54,89 @@ namespace Cipher
                 s1 += s2;
             }
             s = s1;
+            int[,] k = new int[100, 3];
+            Random x = new Random();
+            for (int j = 0; j < 100; j++)
+                for (int f = 0; f < 3; f++)
+                    k[j, f] = x.Next(0, 10);
+            k[0, 0] = x.Next(101, 900);
+            k[0, 1] = x.Next(11, 100);
+
+            int z = x.Next(91, 100);
+            for (int j = 0; j < 10; j++)
+            {
+                int d = x.Next(1, 3);
+                k[z, 0] = d;
+                if (d == 1)
+                {
+                    int p = x.Next(1, 10);
+                    k[z, 1] = p;
+                    p *= k[0, 1];
+                    while (s.Length < p)
+                        p -= s.Length;
+                    if (p == s.Length) p--;
+
+                    StringBuilder sb = new StringBuilder(s);
+                    for (int f = 0; f < p; f++)
+                        sb.Remove(0, 1).Append(s[f]);
+                    s = sb.ToString();
+                }
+                if (d == 2)
+                {
+                    int p = x.Next(1, 10);
+                    k[z, 1] = p;
+                    p *= k[0, 1];
+                    while (s.Length < p)
+                        p -= s.Length;
+                    if (p == s.Length) p--;
+
+                    p = s.Length - p;
+                    StringBuilder sb = new StringBuilder(s);
+                    for (int f = 0; f < p; f++)
+                        sb.Remove(0, 1).Append(s[f]);
+                    s = sb.ToString();
+                }
+               
+                int y = x.Next(1, 10);
+                k[z - y, 2] = y;
+                if (j != 9) z -= y;
+            }
+            k[0, 2] = z;
 
             textBox2.Text = s;
 
+            z = k[0, 2]; ;
+            for (int j = 0; j < 10; j++)
+            {
+                int d = k[z, 0];
+                int p = k[z, 1];
+                if (d == 2)
+                {
+
+                    p *= k[0, 1];
+                    while (s.Length < p)
+                        p -= s.Length;
+                    if (p == s.Length) p--;
+                    StringBuilder sb = new StringBuilder(s);
+                    for (int f = 0; f < p; f++)
+                        sb.Remove(0, 1).Append(s[f]);
+                    s = sb.ToString();
+                }
+                if (d == 1)
+                {
+
+                    p *= k[0, 1];
+                    while (s.Length < p)
+                        p -= s.Length;
+                    if (p == s.Length) p--;
+                    p = s.Length - p;
+                    StringBuilder sb = new StringBuilder(s);
+                    for (int f = 0; f < p; f++)
+                        sb.Remove(0, 1).Append(s[f]);
+                    s = sb.ToString();
+                }
+                z += k[z, 2];
+            }
             s1 = "";
             for (int j = 0; j < s.Length - 4; j += 5)
             {
@@ -66,10 +144,8 @@ namespace Cipher
                 s1 += ((char)a).ToString();
             }
             s = s1;
-
             s = new string(s.ToCharArray().Reverse().ToArray());
             i = 0;
-
             foreach (char c in s)
             {
                 int a = (int)c;
@@ -87,14 +163,12 @@ namespace Cipher
                 s = s.Insert(i, ((char)a).ToString());
                 i++;
             }
-
             for (int j = 0; j < s.Length - 2; j += 2)
             {
                 char ch = s[j];
                 s = s.Remove(j, 1);
                 s = s.Insert(j + 1, ch.ToString());
             }
-
             textBox3.Text = s;
         }
     }
