@@ -45,9 +45,9 @@ namespace Cipher
                 s = s.Insert(i, ((char)a).ToString());
                 i++;
             }
-
+            s = new string(s.ToCharArray().Reverse().ToArray());
             textBox2.Text = s;
-
+            s = new string(s.ToCharArray().Reverse().ToArray());
             i = 0;
             foreach (char c in s)
             {
