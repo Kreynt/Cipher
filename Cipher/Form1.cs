@@ -65,7 +65,7 @@ namespace Cipher//Названия переменных, объектов и м�
             int z = x.Next(91, 100);
             for (int j = 0; j < 10; j++)
             {
-                int d = x.Next(1, 3);
+                int d = x.Next(1, 4);
                 k[z, 0] = d;
                 if (d == 1)
                 {
@@ -96,7 +96,20 @@ namespace Cipher//Названия переменных, объектов и м�
                         sb.Remove(0, 1).Append(s[f]);
                     s = sb.ToString();
                 }
-               
+                if (d == 3)
+                {
+                    int p = x.Next(2, 10);
+                    k[z, 1] = p;
+                    int f = 0;
+                    string sk = "";
+                    while (s[f] == '0')
+                    {
+                        sk += 0;
+                        f++;
+                    }
+                    BigInteger b = BigInteger.Parse(s) * p;
+                    s = sk + b.ToString();
+                }
                 int y = x.Next(1, 10);
                 k[z - y, 2] = y;
                 if (j != 9) z -= y;
@@ -134,6 +147,19 @@ namespace Cipher//Названия переменных, объектов и м�
                     for (int f = 0; f < p; f++)
                         sb.Remove(0, 1).Append(s[f]);
                     s = sb.ToString();
+                }
+                if (d == 3)
+                {
+                    int f = 0;
+                    string sk = "";
+                    while (s[f] == '0')
+                    {
+                        sk += 0;
+                        f++;
+                    }
+                    BigInteger b = BigInteger.Parse(s) / p;
+                    s = sk + b.ToString();
+
                 }
                 z += k[z, 2];
             }
