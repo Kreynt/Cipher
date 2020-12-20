@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Numerics;
 using System.IO;
+using System.Linq;
+using System.Numerics;
+using System.Text;
+using System.Windows.Forms;
 
 namespace Cipher//Названия переменных, объектов и методов сделаны такими специально, обычно я их нормально называю :-) 
 {
@@ -235,7 +231,6 @@ namespace Cipher//Названия переменных, объектов и м�
                         int p = k[z, 1];
                         if (d == 2)
                         {
-
                             p *= k[0, 1];
                             while (s.Length < p)
                                 p -= s.Length;
@@ -247,7 +242,6 @@ namespace Cipher//Названия переменных, объектов и м�
                         }
                         if (d == 1)
                         {
-
                             p *= k[0, 1];
                             while (s.Length < p)
                                 p -= s.Length;
@@ -343,12 +337,101 @@ namespace Cipher//Названия переменных, объектов и м�
                         s = s.Remove(j, 1);
                         s = s.Insert(j + 1, ch.ToString());
                     }
-                    if (s.LastIndexOf("/_=+/'") != -1) 
+                    string t = "";
+                    if (s.LastIndexOf("/_=+/'") != -1)
                     {
-                        textBox10.Text = s.Substring(s.LastIndexOf("/_=+/'") + 6);
+                        t = s.Substring(s.LastIndexOf("/_=+/'") + 6);
                         s = s.Remove(s.LastIndexOf("/_=+/'") - 2);
                     }
                     textBox3.Text = s;
+                    if (t.IndexOf("Q7H@_") == 0)
+                    {
+                        t = t.Remove(0, 5);
+                        int l = 0;
+                        int p = 4;
+                        while (p * 4 < t.Length - l)
+                        {
+                            string b1 = t.Substring(l, p);
+                            string b2 = t.Substring(l + p * 2, p);
+                            t = t.Remove(l, p);
+                            t = t.Insert(l, b2);
+                            t = t.Remove(l + p * 2, p);
+                            t = t.Insert(l + p * 2, b1);
+                            l += p;
+                            b1 = t.Substring(l, p);
+                            b2 = t.Substring(l + p * 2, p);
+                            t = t.Remove(l, p);
+                            t = t.Insert(l, b2);
+                            t = t.Remove(l + p * 2, p);
+                            t = t.Insert(l + p * 2, b1);
+                            l += 3 * p;
+                        }
+                        p = 71;
+                        while (t.Length < p)
+                            p -= t.Length;
+                        if (p == t.Length) p--;
+                        StringBuilder sb = new StringBuilder(t);
+                        for (int f = 0; f < p; f++)
+                            sb.Remove(0, 1).Append(t[f]);
+                        t = sb.ToString();
+                        int f1 = 0;
+                        p = 58;
+                        string sk = "";
+                        while (t[f1] == '0')
+                        {
+                            sk += 0;
+                            f1++;
+                        }
+                        BigInteger b = BigInteger.Parse(t) / p;
+                        t = sk + b.ToString();
+                        p = 23;
+                        while (t.Length < p)
+                            p -= t.Length;
+                        if (p == t.Length) p--;
+                        p = t.Length - p;
+                        StringBuilder sb1 = new StringBuilder(t);
+                        for (int f = 0; f < p; f++)
+                            sb1.Remove(0, 1).Append(t[f]);
+                        t = sb1.ToString();
+                        string t1 = "";
+                        for (int j = 0; j < t.Length - 4; j += 5)
+                        {
+                            int a = Convert.ToInt32(t[j].ToString() + t[j + 1].ToString() + t[j + 2].ToString() + t[j + 3].ToString() + t[j + 4].ToString());
+                            t1 += ((char)a).ToString();
+                        }
+                        t = t1;
+                        t = new string(t.ToCharArray().Reverse().ToArray());
+                        i = 0;
+                        foreach (char c in t)
+                        {
+                            int a = (int)c;
+                            if (i % 2 == 0)
+                            {
+                                a -= (i + 10);
+                            }
+                            else
+                            {
+                                a += (i + 10);
+                            }
+                            while (a < 0) a += 65536;
+                            while (a > 65535) a -= 65536;
+                            t = t.Remove(i, 1);
+                            t = t.Insert(i, ((char)a).ToString());
+                            i++;
+                        }
+                        for (int j = 0; j < t.Length - 2; j += 2)
+                        {
+                            char ch = t[j];
+                            t = t.Remove(j, 1);
+                            t = t.Insert(j + 1, ch.ToString());
+                        }
+                        label13.Text = "Отправитель подтвержден ЭЦП.";
+                    }
+                    else
+                    {
+                        label13.Text = "";
+                    }
+                    textBox10.Text = t;
                 }
             }
             catch
